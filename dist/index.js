@@ -43,7 +43,13 @@ function main() {
         var todos;
         return __generator(this, function (_a) {
             switch (_a.label) {
-                case 0: return [4 /*yield*/, prisma.todo.findMany()];
+                case 0: return [4 /*yield*/, prisma.user
+                        .findUnique({
+                        where: {
+                            id: 1
+                        }
+                    })
+                        .todo()];
                 case 1:
                     todos = _a.sent();
                     return [2 /*return*/, todos];
@@ -52,8 +58,8 @@ function main() {
     });
 }
 main()
-    .then(function (response) {
-    console.log(response);
+    .then(function (todos) {
+    console.log(todos);
     process.stdout.write("Here we are ");
 })["catch"](function () {
     process.stdout.write("There was an error ");

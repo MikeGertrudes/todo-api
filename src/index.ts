@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client'
-import { User, Todo } from '../types'
+import { User, Todo } from './types'
 
 const prisma = new PrismaClient()
 
