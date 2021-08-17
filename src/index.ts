@@ -1,31 +1,19 @@
-import { PrismaClient } from '@prisma/client'
-import { User, Todo } from './types'
+import { ApolloServer } from "apollo-server";
+import typeDefs from "./schema/index.js";
+import resolvers from "./resolvers/index.js";
+import UserAPI from "./datasources/user/index.js";
+import TodoAPI from "./datasources/todo/index.js";
 
-const prisma = new PrismaClient()
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  dataSources: () => ({
+    userAPI: new UserAPI(),
+    todoAPI: new TodoAPI(),
+  }),
+  introspection: true
+});
 
-async function main() {
-  const todos = await prisma.user
-    .findUnique({
-      where: {
-        id: 1
-      }
-    })
-    .todo()
-
-  return todos
-}
-
-main()
-  .then((todos: Todo[]) => {
-    console.log(todos)
-
-    process.stdout.write(`Here we are `)
-  })
-  .catch(() => {
-    process.stdout.write(`There was an error `)
-  })
-  .finally(async () => {
-    process.stdout.write(`annnnd we're done.\n`)
-
-    await prisma.$disconnect()
-  })
+server
+  .listen()
+  .then(({ url }: { url: string; }) => console.log(`Server is running on ${url}`));
