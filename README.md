@@ -5,8 +5,8 @@ Uses GraphQL and Prisma and connects to an AWS RDS Postgres database to store an
 ### Get all todos for a user
 ```
 // Query
-query($id: Int!) {
-  user(id: $id) {
+query($userId: Int!) {
+  user(userId: $id) {
     firstName
     todos {
       title
