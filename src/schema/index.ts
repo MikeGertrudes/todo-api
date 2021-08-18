@@ -1,6 +1,6 @@
 const schema = `
   type Query {
-    user(id: Int!): User
+    user(userId: Int!): User
   }
 
   type User {
@@ -17,6 +17,12 @@ const schema = `
     title: String
     description: String
     status: String
+  }
+
+  type Mutation {
+    createTodo(userId: Int!, title: String!, description: String): Todo!
+    updateTodo(userId: Int!, todoId: Int!, title: String, description: String): Todo!
+    deleteTodo(userId: Int!, todoId: Int!): Todo
   }
 `;
 

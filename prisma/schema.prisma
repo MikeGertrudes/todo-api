@@ -14,8 +14,8 @@ model todo {
   status      String
   created_at  DateTime @default(now()) @db.Timestamptz(6)
   updated_at  DateTime @default(now()) @db.Timestamptz(6)
-  user_id     Int
-  user        user     @relation(fields: [user_id], references: [id])
+  userId      Int      @map("user_id")
+  user        user     @relation(fields: [userId], references: [id])
 }
 
 model user {
