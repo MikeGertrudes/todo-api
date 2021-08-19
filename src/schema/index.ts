@@ -17,6 +17,11 @@ const schema = `
     title: String
     description: String
     status: String
+    comments: [Comment]
+  }
+
+  type Comment {
+    value: String
   }
 
   type Mutation {

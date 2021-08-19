@@ -5,7 +5,11 @@ export default {
   },
   User: {
     todos: (parent: any, __: any, { dataSources }: any) =>
-      dataSources.todoAPI.getTodosForUser(parent.id)
+      dataSources.todoAPI.getTodosForUser(parent.id),
+  },
+  Todo: {
+    comments: (parent: any, __: any, { dataSources }: any) =>
+      dataSources.commentAPI.getCommentsForTodo(parent.id)
   },
   Mutation: {
     createTodo: (
