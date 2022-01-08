@@ -19,14 +19,14 @@ export const createTodo = async (
     description
   }: TodoPayload
 ): Promise<Todo> =>
-  await prisma.todo.create({
+  await prisma.todos.create({
     data: {
       title,
       description,
       status: DEFAULT_TODO_STATUS,
-      user: {
+      users: {
         connect: {
-          id: userId,
+          userId,
         },
       }
     }
@@ -41,33 +41,41 @@ export const updateTodo = async (
     status
   }: TodoPayload
 ): Promise<Todo> =>
-  await prisma.todo.update({
+  await prisma.todos.update({
     where: {
-      id: todoId,
+      todoId,
     },
     data: {
       title,
       description,
       status,
-      user: {
+      users: {
         connect: {
-          id: userId,
+          userId,
         },
       }
     }
   });
 
-export const deleteTodo = async (_userId: number, todoId: number): Promise<Todo | null> =>
-  await prisma.todo.delete({
+// user with id 2, shouldn't be able to delete something they don't own, like user 3's todo
+export const deleteTodo = async (_userId: number, todoId: number): Promise<Todo | null> => {
+  // const allowedTodos = await prisma.user
+  //   .findUnique({ where: { id: 2 }})
+  //   .todo()
+  //   .map
+
+  return await prisma.todos.delete({
     where: {
-      id: todoId,
+      todoId
     },
   });
+}
 
-export const getTodosForUser = async (userId: number): Promise<Todo[] | null> => await prisma.user
+
+export const getTodosForUser = async (userId: number): Promise<Todo[] | null> => await prisma.users
     .findUnique({
       where: {
-        id: userId,
+        userId,
       }
     })
-    .todo();
+    .todos();

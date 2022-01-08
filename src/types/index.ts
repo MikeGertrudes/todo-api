@@ -1,5 +1,5 @@
 export type {
-  user as User,
-  todo as Todo,
-  comment as Comment,
+  users as User,
+  todos as Todo,
+  comments as Comment,
 } from "@prisma/client/index"

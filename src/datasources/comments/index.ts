@@ -4,9 +4,9 @@ import {
   createComment,
 } from "./api.js"
 
-import { Comment } from './../../types'
+import { Comment } from '../../types'
 
-export default class CommentAPI extends DataSource {
+export default class CommentsAPI extends DataSource {
   constructor () {
     super();
   }

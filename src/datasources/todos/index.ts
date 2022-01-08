@@ -6,9 +6,9 @@ import {
   deleteTodo,
 } from "./api.js"
 
-import { Todo } from './../../types'
+import { Todo } from '../../types'
 
-export default class TodoAPI extends DataSource {
+export default class TodosAPI extends DataSource {
   constructor () {
     super();
   }

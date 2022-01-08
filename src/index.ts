@@ -1,17 +1,17 @@
 import { ApolloServer } from "apollo-server";
 import typeDefs from "./schema/index.js";
 import resolvers from "./resolvers/index.js";
-import UserAPI from "./datasources/user/index.js";
-import TodoAPI from "./datasources/todo/index.js";
-import CommentAPI from "./datasources/comment/index.js";
+import UsersAPI from "./datasources/users/index.js";
+import TodosAPI from "./datasources/todos/index.js";
+import CommentsAPI from "./datasources/comments/index.js";
 
 const server = new ApolloServer({
   typeDefs,
   resolvers,
   dataSources: () => ({
-    userAPI: new UserAPI(),
-    todoAPI: new TodoAPI(),
-    commentAPI: new CommentAPI(),
+    usersAPI: new UsersAPI(),
+    todosAPI: new TodosAPI(),
+    commentsAPI: new CommentsAPI(),
   }),
   introspection: true
 });

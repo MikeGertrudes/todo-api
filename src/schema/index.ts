@@ -4,7 +4,7 @@ const schema = `
   }
 
   type User {
-    id: Int
+    userId: Int
     firstName: String
     lastName: String
     handle: String
@@ -13,10 +13,12 @@ const schema = `
   }
 
   type Todo {
-    id: Int
+    todoId: Int
     title: String
     description: String
+    dueDate: String
     status: String
+    created_at: String
     comments: [Comment]
   }
 
@@ -26,7 +28,7 @@ const schema = `
 
   type Mutation {
     createTodo(userId: Int!, title: String!, description: String): Todo!
-    updateTodo(userId: Int!, todoId: Int!, title: String, description: String): Todo!
+    updateTodo(userId: Int!, todoId: Int!, title: String, description: String, status: String): Todo!
     deleteTodo(userId: Int!, todoId: Int!): Todo
   }
 `;

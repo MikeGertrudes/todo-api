@@ -16,26 +16,26 @@ export const createComment = async (
     value
   }: CommentPayload
 ): Promise<Comment> =>
-  await prisma.comment.create({
+  await prisma.comments.create({
     data: {
       value,
-      user: {
+      users: {
         connect: {
-          id: userId,
+          userId,
         },
       },
-      todo: {
+      todos: {
         connect: {
-          id: todoId,
+          todoId,
         }
       }
     }
   });
 
-export const getCommentsForTodo = async (todoId: number): Promise<Comment[] | null> => await prisma.todo
+export const getCommentsForTodo = async (todoId: number): Promise<Comment[] | null> => await prisma.todos
     .findUnique({
       where: {
-        id: todoId,
+        todoId,
       }
     })
-    .comment();
+    .comments();

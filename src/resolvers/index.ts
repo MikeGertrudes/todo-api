@@ -1,15 +1,14 @@
 export default {
   Query: {
     user: (_: any, { userId }: { userId: number }, { dataSources }: any) =>
-      dataSources.userAPI.getUserById(userId),
+      dataSources.usersAPI.getUserById(userId),
   },
   User: {
-    todos: (parent: any, __: any, { dataSources }: any) =>
-      dataSources.todoAPI.getTodosForUser(parent.id),
+    todos: (parent: any, __: any, { dataSources }: any) => dataSources.todosAPI.getTodosForUser(parent.userId)
   },
   Todo: {
     comments: (parent: any, __: any, { dataSources }: any) =>
-      dataSources.commentAPI.getCommentsForTodo(parent.id)
+      dataSources.commentsAPI.getCommentsForTodo(parent.todoId)
   },
   Mutation: {
     createTodo: (
